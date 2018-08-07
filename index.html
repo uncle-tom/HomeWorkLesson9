@@ -43,6 +43,7 @@
 	  visibility: hidden;
 	  background-color: #000000a6;
 	  z-index: 3;
+	  transition: visibility 0.5s;
 	}
 
 	.modal-show {
@@ -51,16 +52,30 @@
 
 	.modal-content {
 		position: relative;
-		top: 50px;
+		top: -75%;
 		max-width: 500px;
 	  background: white;
 	  margin: auto;
 	  padding: 30px;
+	  transition: top 0.5s;
+	  /*animation: up 1s forwards;*/
+	}
+	.modal-content.animate {
+		top: 0px;
+		transition: top 0.5s;
+	}
+
+	@keyframes up {
+		0% {
+			top: -75%;
+		}
+		100% {
+			top: 0px;
+		}
 	}
 
 	</style>
 	<div class="content">
-	  <p>Content</p>
 	  <div class="btn">Open modal</div>
 	</div>
 
@@ -74,9 +89,11 @@
 		body = document.querySelector('body');
 		btn = document.querySelector('.btn');
 		modal = document.querySelector('.modal');
+		modal_content = document.querySelector('.modal-content');
 
 		function ModalShow(){
 			modal.classList.toggle('modal-show');
+			modal_content.classList.toggle('animate');
 		}
 
 		function OutsideClick(){
